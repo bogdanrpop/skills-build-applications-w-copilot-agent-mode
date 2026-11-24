@@ -24,6 +24,10 @@ In this exercise, you will:
 1. Implement and test React routes and API-driven user experiences.
 1. Verify the integrated system and review a multi-tier pull request before merging.
 
+### Seed data and idempotence
+
+Run the backend seed with `npm run seed --prefix octofit-tracker/backend`. It uses stable demo records and upserts, so rerunning it updates or adds those fixtures without duplicating them. It does not clear collections or remove unrelated records. When a seeded user moves to a different demo team, the seed removes that user from the previous team's member list and ensures the new team includes them.
+
 ### How to start this exercise
 
 Simply copy the exercise to your account, then give your favorite Octocat (Mona) **about 20 seconds** to prepare the first lesson, then **refresh the page**.
