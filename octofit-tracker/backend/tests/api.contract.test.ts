@@ -103,4 +103,22 @@ describe('OctoFit API contract', () => {
     expect(unknownResponse.status).toBeGreaterThanOrEqual(400);
     expect(unknownResponse.status).toBeLessThan(500);
   });
+
+  it('returns no workout suggestions when none match the user goal or recent activity', async () => {
+    const { user, team } = await createUserAndTeam('Riley', 'riley@example.com', 'Riley');
+    await User.updateOne({ _id: user._id }, { $set: { fitnessGoal: 'mobility' } });
+    await Activity.create({
+      user: user._id,
+      team: team._id,
+      type: 'run',
+      minutes: 20,
+      points: 20,
+      occurredAt: new Date(),
+    });
+    await Workout.create({ title: 'Strength Circuit', focus: 'strength', minutes: 30, difficulty: 'moderate' });
+
+    const response = await request(app).get('/api/workouts/suggestions/riley%40example.com');
+    expect(response.status).toBe(200);
+    expect(response.body.suggestions).toEqual([]);
+  });
 });
