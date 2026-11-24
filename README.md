@@ -1,4 +1,4 @@
-# Build and test a multi-tier application with GitHub Copilot
+# Build and test a multi-tier application with GitHub Copilot FIRST
 
 _Use GitHub Copilot agent mode to implement, test, and review a React + Express + MongoDB application from executable contracts._
 
